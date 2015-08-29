@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1440793043 source:c:\users\juan\desktop\proyecto1\proyecto1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"mregistros.h"
+	"Operaciones.h"
+
+1440784499 c:\users\juan\desktop\proyecto1\proyecto1\mregistros.h
+	<stdint.h>
+
+1440726100 source:c:\users\juan\desktop\proyecto1\proyecto1\mregistros.c
+
+1440792622 c:\users\juan\desktop\proyecto1\proyecto1\operaciones.h
+	<stdint.h>
+
+1440735992 source:c:\users\juan\desktop\proyecto1\proyecto1\operaciones.c
+	<stdint.h>
+	"Operaciones.h"
+
