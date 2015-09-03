@@ -3,7 +3,7 @@
 * \brief  funcion que imprime el registro del operador 1
 * \param ptro operador 1
 * \param n operador 2
-* \return un entero de 32 bits positivos
+* \return no retorna valor
 */
 void Mregistro(uint32_t *ptro,int n)
 {
