@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1442660378 source:c:\users\juan\documents\pruebas\profe\decoder.c
+	"decoder.h"
+	"Operaciones.h"
+	<stdint.h>
+
+1442289472 c:\users\juan\documents\pruebas\profe\decoder.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+
+1442672084 c:\users\juan\documents\pruebas\profe\operaciones.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1442666052 source:c:\users\juan\documents\pruebas\profe\main.c
+	<stdio.h>
+	<stdlib.h>
+	"decoder.h"
+	"mregistros.h"
+
+1442666675 c:\users\juan\documents\pruebas\profe\mregistros.h
+
+1442668838 source:c:\users\juan\documents\pruebas\profe\mregistros.c
+	<stdint.h>
+	<stdlib.h>
+	"mregistros.h"
+
+1442669455 source:c:\users\juan\documents\pruebas\profe\operaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"Operaciones.h"
+

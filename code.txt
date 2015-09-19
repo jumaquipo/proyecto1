@@ -1,0 +1,41 @@
+MOV R0,#20
+
+MOV R1,#6
+
+CMP R0,R1
+
+BL #3
+
+
+B #0
+
+MOV R2,R0
+
+MOV R3,#0x1
+
+LSL R3,R3,#31
+
+MOV R0,#0
+
+MOV R4,#0
+
+LSL R2,R2,#1
+
+ADC R4,R4,R4
+
+CMP R4,R1
+
+BCC #3
+
+ADD R0,R0,R3
+
+SUB R4,R4,R1
+
+LSR R3,R3,#1
+
+BNE #-7
+
+MOV R1,R4
+
+BX LR
+
