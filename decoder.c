@@ -253,6 +253,16 @@ void decodeInstruction(instruction_t instruction)
             if(strcmp(instruction.mnemonic,"BLE") == 0){
                 BLE(instruction.op1_value);
             }
+          
+            if(strcmp(instruction.mnemonic,"B") == 0){
+                B(instruction.op1_value);
+            }
+            if(strcmp(instruction.mnemonic,"BL") == 0){
+                BL(instruction.op1_value);
+            }
+            if(strcmp(instruction.mnemonic,"BX") == 0){
+                BX(instruction.op1_value);
+            }
         }
 
 
