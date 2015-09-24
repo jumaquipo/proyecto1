@@ -312,9 +312,10 @@ else{
 }
 void LSR (uint32_t *Rd,uint32_t Rn,int y){
     Pc+=2;
-   *Rd=Rn>>y;
-   if(((Rn&(1<<y-1))>>y-1)==1){
- c=1;
+   * Rn=Rn>>(y-1);
+
+  if((Rn&1)==1){
+        c=1;
 }
 else
 {
@@ -619,7 +620,9 @@ Pc+=Sal*2;
 void BX(int Sal){
 Pc=Sal;
 }
-
+void OBLR (int *P){
+*P=LR;
+}
 void PBanderas (){
     printf("CARRY:----- %d\n",c);
     printf("ZERO:------ %d\n",s);
