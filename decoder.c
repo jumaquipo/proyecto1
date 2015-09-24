@@ -2,13 +2,14 @@
 #include "Operaciones.h"
 #include <stdint.h>
 uint32_t *R;
+uint32_t LR;
 void registro(uint32_t *A){
 R=A;
 }
 
 void decodeInstruction(instruction_t instruction)
 {
-    if(instruction.op1_type=='R'){
+    if((instruction.op1_type=='R')&&(instruction.op2_type=='#')&&((instruction.op3_type!='R'))){
 	if( strcmp(instruction.mnemonic,"ADC") == 0 ){
 
     ADC(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
@@ -75,7 +76,7 @@ void decodeInstruction(instruction_t instruction)
     TST(R[instruction.op1_value],instruction.op2_value);
 }
     }
-    if(instruction.op2_type=='R'){
+     if((instruction.op1_type=='R')&&(instruction.op2_type=='R')&&((instruction.op3_type!='R'))){
 	if( strcmp(instruction.mnemonic,"ADC") == 0 ){
 
     ADC(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
@@ -142,7 +143,7 @@ void decodeInstruction(instruction_t instruction)
     TST(R[instruction.op1_value],R[instruction.op2_value]);
 }
     }
-      if(instruction.op3_type=='R'){
+      if((instruction.op1_type=='R')&&(instruction.op2_type=='R')&&((instruction.op3_type=='R'))){
 	if( strcmp(instruction.mnemonic,"ADC") == 0 ){
 
     ADC(&R[instruction.op1_value],R[instruction.op2_value],R[instruction.op3_value]);
@@ -210,7 +211,10 @@ void decodeInstruction(instruction_t instruction)
 }
     }
     if(strncmp(instruction.mnemonic,"B",1)==0){
-        if(instruction.op1_type='#'){
+        if(instruction.op1_type!='R'){
+                if(strcmp(instruction.mnemonic,"BCC") == 0){
+                       BCC(instruction.op1_value);
+                }
             if(strcmp(instruction.mnemonic,"BEQ") == 0){
                 BEQ(instruction.op1_value);
             }
@@ -253,7 +257,6 @@ void decodeInstruction(instruction_t instruction)
             if(strcmp(instruction.mnemonic,"BLE") == 0){
                 BLE(instruction.op1_value);
             }
-          
             if(strcmp(instruction.mnemonic,"B") == 0){
                 B(instruction.op1_value);
             }
@@ -261,14 +264,23 @@ void decodeInstruction(instruction_t instruction)
                 BL(instruction.op1_value);
             }
             if(strcmp(instruction.mnemonic,"BX") == 0){
-                BX(instruction.op1_value);
+                          BX(instruction.op1_value);
             }
+
         }
+        if(strcmp(instruction.mnemonic,"BX") == 0){
+        if(instruction.op1_type=='L'){
+                    OBLR(&LR);
+                    BX(LR);
+                 }
+        }
+
 
 
     }
 
 }
+
 
 
 
