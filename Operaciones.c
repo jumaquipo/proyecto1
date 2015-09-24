@@ -610,11 +610,11 @@ void BLE(int Sal){
 }
 void B(int Sal){
 
-Pc+=Sal*2+2;
+Pc+=Sal*2;
 }
 void BL(int Sal){
 LR=Pc+2;
-Pc=Sal*2+2;
+Pc+=Sal*2;
 }
 void BX(int Sal){
 Pc=Sal;
