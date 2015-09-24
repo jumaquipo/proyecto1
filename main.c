@@ -33,23 +33,33 @@ int main(void)
 registro(&R[0]);
 printf("\n");
 	/* Ejemplo de uso
-		Llama la funci髇 que separa el mnemonico y los operandos
-		Llama la instrucci髇 que decodifica y ejecuta la instrucci髇
+		Llama la funci贸n que separa el mnemonico y los operandos
+		Llama la instrucci贸n que decodifica y ejecuta la instrucci贸n
 	*/
 	// Esto debe ser ciclico para la lectura de todas las instrucciones, de acuerdo
 	// al valor del PC (Program Counter)
 	Mregistro(R,12);
 	while(C<200){
 
-	instruction = getInstruction(instructions[PC]); // Instrucci髇 en la posici髇 0
+	instruction = getInstruction(instructions[PC]); // Instrucci贸n en la posici贸n 0
 
     decodeInstruction(instruction);
     Mregistro(R,12);
+     if(strncmp(instruction.mnemonic,"B",1)!=0){
+
     printf("\nInstruccion: %d   es %s<%c %d %c %d>\n\n",PC,instruction.mnemonic,instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value);
     PBanderas();
     RPC(&PC);
     getchar();
     C+=2;
+     }
+     if(strncmp(instruction.mnemonic,"B",1)==0){
+        printf("\nInstruccion: %d   es %s<%c %d>\n\n",PC,instruction.mnemonic,instruction.op1_type,instruction.op1_value);
+    PBanderas();
+    RPC(&PC);
+    getchar();
+    C+=2;
+     }
 
 	}
 
