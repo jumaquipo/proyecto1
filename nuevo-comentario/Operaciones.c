@@ -725,9 +725,12 @@ for(a=255;a>191;a-=4){
         attroff(COLOR_PAIR(1));
         refresh();
         attron(COLOR_PAIR(2));
-        printw("  %.8X",memor[i]);
+        printw("  %.4X",memor[i]);
         attroff(COLOR_PAIR(2));
-            refresh();
+        attron(COLOR_PAIR(2));
+        printw("  %.4X",memor[i]);
+        attroff(COLOR_PAIR(2));
+        refresh();
         attron(COLOR_PAIR(1));
         printw("  %.2X",a-64);
         attroff(COLOR_PAIR(1));

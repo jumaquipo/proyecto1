@@ -1,0 +1,186 @@
+# depslib dependency file v1.0
+1443588395 source:c:\users\juan\documents\pruebas\pruebamregistroncurses\mregistro.c
+	"Mregistros.h"
+
+1443586960 c:\users\juan\documents\pruebas\pruebamregistroncurses\mregistros.h
+	<stdint.h>
+	<stdlib.h>
+	<curses.h>
+
+1443592433 source:c:\users\juan\documents\pruebas\pruebamregistroncurses\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<curses.h>
+	"Mregistros.h"
+	"Operaciones.h"
+	"decoder.h"
+
+1443119649 c:\users\juan\documents\pruebas\pruebamregistroncurses\operaciones.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1443588815 source:c:\users\juan\documents\pruebas\pruebamregistroncurses\operaciones.c
+	"Operaciones.h"
+	<curses.h>
+
+1443571123 source:c:\users\juan\documents\pruebas\pruebamregistroncurses\decoder.c
+	"decoder.h"
+	"Operaciones.h"
+	<stdint.h>
+
+1442289472 c:\users\juan\documents\pruebas\pruebamregistroncurses\decoder.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+
+1443829710 source:c:\users\juan\documents\curses\pruebamregistroncurses\decoder.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"Operaciones.h"
+	"decoder.h"
+
+1443827281 c:\users\juan\documents\curses\pruebamregistroncurses\decoder.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+
+1443828826 c:\users\juan\documents\curses\pruebamregistroncurses\operaciones.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1443829440 source:c:\users\juan\documents\curses\pruebamregistroncurses\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<curses.h>
+	<dos.h>
+	"Mregistros.h"
+	"Operaciones.h"
+	"decoder.h"
+
+1443586960 c:\users\juan\documents\curses\pruebamregistroncurses\mregistros.h
+	<stdint.h>
+	<stdlib.h>
+	<curses.h>
+
+1443679704 source:c:\users\juan\documents\curses\pruebamregistroncurses\mregistro.c
+	"Mregistros.h"
+
+1443829630 source:c:\users\juan\documents\curses\pruebamregistroncurses\operaciones.c
+	"Operaciones.h"
+	<curses.h>
+
+1443829156 source:c:\users\juan\documents\curses\pruebamregistroncurses\minstruccion.c
+	"Minstruccion.h"
+
+1443672525 c:\users\juan\documents\curses\pruebamregistroncurses\minstruccion.h
+	<curses.h>
+	"decoder.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1443673416 source:c:\users\juan\documents\curses\pruebamregistroncurses\lregistros.c
+
+1443829712 source:f:\pruebamregistroncurses\decoder.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"Operaciones.h"
+	"decoder.h"
+
+1443843864 f:\pruebamregistroncurses\operaciones.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1443827282 f:\pruebamregistroncurses\decoder.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+
+1443673418 source:f:\pruebamregistroncurses\lregistros.c
+
+1443829442 source:f:\pruebamregistroncurses\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<curses.h>
+	<dos.h>
+	"Mregistros.h"
+	"Operaciones.h"
+	"decoder.h"
+
+1443586962 f:\pruebamregistroncurses\mregistros.h
+	<stdint.h>
+	<stdlib.h>
+	<curses.h>
+
+1443829158 source:f:\pruebamregistroncurses\minstruccion.c
+	"Minstruccion.h"
+
+1443672526 f:\pruebamregistroncurses\minstruccion.h
+	<curses.h>
+	"decoder.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1443679706 source:f:\pruebamregistroncurses\mregistro.c
+	"Mregistros.h"
+
+1443829712 source:c:\users\juan\desktop\proyecto1\decoder.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"Operaciones.h"
+	"decoder.h"
+
+1443843864 c:\users\juan\desktop\proyecto1\operaciones.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1443827282 c:\users\juan\desktop\proyecto1\decoder.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<stdint.h>
+
+1443673418 source:c:\users\juan\desktop\proyecto1\lregistros.c
+
+1443829442 source:c:\users\juan\desktop\proyecto1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<curses.h>
+	<dos.h>
+	"Mregistros.h"
+	"Operaciones.h"
+	"decoder.h"
+
+1443586962 c:\users\juan\desktop\proyecto1\mregistros.h
+	<stdint.h>
+	<stdlib.h>
+	<curses.h>
+
+1443829158 source:c:\users\juan\desktop\proyecto1\minstruccion.c
+	"Minstruccion.h"
+
+1443672526 c:\users\juan\desktop\proyecto1\minstruccion.h
+	<curses.h>
+	"decoder.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1443679706 source:c:\users\juan\desktop\proyecto1\mregistro.c
+	"Mregistros.h"
+

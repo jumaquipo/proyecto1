@@ -1,9 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include "Operaciones.h"
 #include "decoder.h"
-
+#include "Operaciones.h"
+#include <stdint.h>
 uint32_t *R;
 uint32_t LR;
 void registro(uint32_t *A){
@@ -12,9 +9,8 @@ R=A;
 
 void decodeInstruction(instruction_t instruction)
 {
-
-    if((instruction.op1_type=='R')&&(instruction.op2_type=='#')){
-	  if( strcmp(instruction.mnemonic,"ADC") == 0 ){
+    if((instruction.op1_type=='R')&&(instruction.op2_type=='#')&&((instruction.op3_type!='R'))){
+	if( strcmp(instruction.mnemonic,"ADC") == 0 ){
 
     ADC(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
 
@@ -49,7 +45,6 @@ void decodeInstruction(instruction_t instruction)
 	if( strcmp(instruction.mnemonic,"MOV") == 0 ){
     MOV(&R[instruction.op1_value],instruction.op2_value);
 	}
-
 	if( strcmp(instruction.mnemonic,"MUL") == 0 ){
     MUL(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
 	}
@@ -271,14 +266,10 @@ void decodeInstruction(instruction_t instruction)
             if(strcmp(instruction.mnemonic,"BX") == 0){
                           BX(instruction.op1_value);
             }
-             if(strcmp(instruction.mnemonic,"PUSH") == 0){
-                          PUSH(R[instruction.op1_value],R[instruction.op2_value],R[instruction.op3_value]);
-            }
-
 
         }
         if(strcmp(instruction.mnemonic,"BX") == 0){
-        if(instruction.op1_type=='L'||instruction.op1_type=='R'){
+        if(instruction.op1_type=='L'){
                     OBLR(&LR);
                     BX(LR);
                  }
@@ -291,16 +282,14 @@ void decodeInstruction(instruction_t instruction)
 }
 
 
+
+
 instruction_t getInstruction(char* instStr)
 {
-	instruction_t instruction=
-	{
-		.registers_list = {0},
-		.op3_type  = 'N',
-		.op3_value = 0
-	};
-	char* split = (char*)malloc(strlen(instStr)+1);
+	instruction_t instruction;
+	char* split = (char*)malloc(strlen(instStr));
 	int num=0;
+
 
 	strcpy(split, instStr);
 	/* Obtiene el mnemonico de la instrucción */
@@ -312,51 +301,28 @@ instruction_t getInstruction(char* instStr)
 	{
 		switch(num){
 			case 1:
-				if(split[0] == '{'){
-					instruction.op1_type  = split[0];
-					split++;
-					do{
-						if(split[0]=='L')
-							instruction.registers_list[14] = 1;
-						else if(split[0]=='P')
-							instruction.registers_list[15] = 1;
-						else
-							instruction.registers_list[(uint8_t)strtoll(split+1, NULL, 0)] = 1;
-
-						split = strtok(NULL, ",");
-					}while(split != NULL);
-				}else{
-					instruction.op1_type  = split[0];
-					instruction.op1_value = (uint32_t)strtoll(split+1, NULL, 0);
-				}
+				instruction.op1_type  = split[0];
+				instruction.op1_value = (uint32_t)strtol(split+1, NULL, 0);
 				break;
 
 			case 2:
-				if(split[0] == '[')
-					split++;
-
 				instruction.op2_type  = split[0];
-				instruction.op2_value = (uint32_t)strtoll(split+1, NULL, 0);
+				instruction.op2_value = (uint32_t)strtol(split+1, NULL, 0);
 				break;
 
 			case 3:
 				instruction.op3_type  = split[0];
-				instruction.op3_value = (uint32_t)strtoll(split+1, NULL, 0);
+				instruction.op3_value = (uint32_t)strtol(split+1, NULL, 0);
 				break;
 		}
-		if(split != NULL){
-			split = strtok(NULL, " ,.");
-			num++;
-		}
+
+		split = strtok(NULL, " ,.");
+		num++;
 	}
 
-	if(instruction.op1_type == 'L'){
-		instruction.op1_value = 14;
-		instruction.op1_type = 'R';
-	}
-
-	if(instruction.op1_type == '{'){
-		instruction.op1_type = 'P';
+	if(num==3){
+		instruction.op3_type  = 'N';
+		instruction.op3_value = 0;
 	}
 
 	free(split);
@@ -375,12 +341,13 @@ int readFile(char* filename, ins_t* instructions)
 	if( fp==NULL )
 		return -1;	/* Error al abrir el archivo */
 
-	lines = countLines(fp);	/* Cantidad de líneas*/
+	lines = countLines(fp)-1;	/* Cantidad de líneas*/
+
 
 	/* Asignación dinámica de memoria para cada instrucción */
 	instructions->array = (char**)malloc(lines*sizeof(char*));
 	while ( fgets(buffer, 50, fp) != NULL && line<lines ){
-        instructions->array[line] = (char*)malloc((strlen(buffer)+1)*sizeof(char));
+        instructions->array[line] = (char*)malloc(strlen(buffer)*sizeof(char));
 		strcpy(instructions->array[line], buffer);
 		line++;
  	}
@@ -394,11 +361,14 @@ int readFile(char* filename, ins_t* instructions)
 int countLines(FILE* fp)
 {
 	int lines=0;
-	char buffer[50];
+	int ch;
 
-	while( fgets(buffer, 50, fp) != NULL )
+	while(!feof(fp))
+	{
+	  ch = fgetc(fp);
+	  if(ch == '\n')
 		lines++;
-
+	}
 	rewind(fp);
 
 	return lines;

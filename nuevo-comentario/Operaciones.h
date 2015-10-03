@@ -4,10 +4,10 @@
 //PROFE SE TUVO UN PROBLEMA CON EL MSYS DEBIDO A ESO NO PUDIMOS TERMINAR CON LA INTERFAS COMO HUBIESEMOS QUERIDO
 
 /**
- *  \brief     Esta función permite que el puntero operador 1 apute a la variable PC DEL MAIN, la modifica con el valor del PC.
+ *  \brief     Esta función permite que el puntero operador 1 apute a la variable PC DEL MAIN, la modifica con el valor del PC. 
  *  \param     P operador 1 puntero tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para modificar el valor del contador PC.
+ *  \details   Esta función se utiliza para modificar el valor del contador PC. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -17,24 +17,12 @@
 void RPC(int *P);
 
 /**
- *  \brief     Esta función obtiene registros.
- *  \param     P operador 1 puntero tipo entero.
- *  \return    No retorna valor.
- *  \author    Juan Manuel Quintero Polania- Leader
- *  \author    Julio Edgar Mosquera Angulo - Documenting
- *  \version   4.1a
- *  \date      19/09/2015
- *  \pre       First initialize the system.
-*/
-void OBLR(int *P);
-
-/**
- *  \brief     Esta función realiza la respectiva suma con carry entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1.
+ *  \brief     Esta función realiza la respectiva suma con carry entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para realizar la ADD con carry.
+ *  \details   Esta función se utiliza para realizar la ADD con carry. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -44,12 +32,12 @@ void OBLR(int *P);
 void ADC(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 /**
- *  \brief     Esta función realiza la respectiva suma entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1.
+ *  \brief     Esta función realiza la respectiva suma entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para realizar la ADD.
+ *  \details   Esta función se utiliza para realizar la ADD. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -59,12 +47,12 @@ void ADC(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 void ADD(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 /**
- *  \brief     Esta función realiza la OR exclusiva bit a bit entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1.
+ *  \brief     Esta función realiza la OR exclusiva bit a bit entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para realizar la EOR.
+ *  \details   Esta función se utiliza para realizar la EOR. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -75,12 +63,12 @@ void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 
 /**
- *  \brief     Esta función realiza la OR logica bit a bit entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1.
+ *  \brief     Esta función realiza la OR logica bit a bit entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    Retorna un valor tipo entero de 32 bits.
- *  \details   Esta función se utiliza para realizar la OR.
+ *  \details   Esta función se utiliza para realizar la OR. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -90,12 +78,12 @@ void EOR(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 uint32_t OR(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 /**
- *  \brief     Esta función realiza la AND bit a bit entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1.
+ *  \brief     Esta función realiza la AND bit a bit entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    Retorna un valor tipo entero de 32 bits.
- *  \details   Esta función se utiliza para realizar la AND.
+ *  \details   Esta función se utiliza para realizar la AND. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -105,7 +93,7 @@ uint32_t OR(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 uint32_t AND (uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 /**
- *  \brief     Esta función escribe un valor en un registro entre el operador 1 y el operador 2, el resultdo lo guarda en el operador 1.
+ *  \brief     Esta función escribe un valor en un registro entre el operador 1 y el operador 2, el resultdo lo guarda en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    Retorna un valor tipo entero de 32 bits.
@@ -118,12 +106,12 @@ uint32_t AND (uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 uint32_t MOV (uint32_t *Rd,uint32_t Rn);
 
 /**
- *  \brief     Esta función la realiza una resta entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1.
+ *  \brief     Esta función la realiza una resta entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    Retorna un valor entero de 32 bits.
- *  \details   Esta función se utiliza para hacer una resta  logica
+ *  \details   Esta función se utiliza para hacer una resta  logica 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -133,11 +121,11 @@ uint32_t MOV (uint32_t *Rd,uint32_t Rn);
 uint32_t SUB (uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 /**
- *  \brief     Esta función hace la resta entre el operador 1 y el operador 2, pero no guarda el resultado solo modifica banderas.
+ *  \brief     Esta función hace la resta entre el operador 1 y el operador 2, pero no guarda el resultado solo modifica banderas. 
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para realizar una resta pero no guarda resultado.
+ *  \details   Esta función se utiliza para realizar una resta pero no guarda resultado. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -147,11 +135,11 @@ uint32_t SUB (uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 void CMP(uint32_t Rn,uint32_t Rm);
 
 /**
- *  \brief     Esta función hace la suma entre el operador 1 y el operador 2, pero no guarda el resultado solo modifica banderas.
+ *  \brief     Esta función hace la suma entre el operador 1 y el operador 2, pero no guarda el resultado solo modifica banderas. 
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    Retorna un valor tipo entero de 32 bits.
- *  \details   Esta función se utiliza para realizar una suma pero no guarda resultado.
+ *  \details   Esta función se utiliza para realizar una suma pero no guarda resultado. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -161,12 +149,12 @@ void CMP(uint32_t Rn,uint32_t Rm);
 uint32_t CMN (uint32_t Rn,uint32_t Rm);
 
 /**
- *  \brief     Esta función hace la multiplicacion entre los registros del operador 2 y el operador 3, ademas guarda los 32 bits menos significativos en el operador 1.
+ *  \brief     Esta función hace la multiplicacion entre los registros del operador 2 y el operador 3, ademas guarda los 32 bits menos significativos en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para realizar multiplicacion con número sih signo.
+ *  \details   Esta función se utiliza para realizar multiplicacion con número sih signo. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -176,11 +164,11 @@ uint32_t CMN (uint32_t Rn,uint32_t Rm);
 void MUL (uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 
 /**
- *  \brief     Esta función realiza la AND bit a bit entre el operador 1 y el operador 2, pero no guarda el resultado, solo modifica banderas.
+ *  \brief     Esta función realiza la AND bit a bit entre el operador 1 y el operador 2, pero no guarda el resultado, solo modifica banderas. 
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    No retorna valor.
- *  \details   Esta función cumple la misma función que la instrucción AND, solo que en este caso se modifican las banderas.
+ *  \details   Esta función cumple la misma función que la instrucción AND, solo que en este caso se modifican las banderas. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -190,7 +178,7 @@ void MUL (uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 void TST (uint32_t Rn,uint32_t Rm);
 
 /**
- *  \brief     Esta función hace el desplazamiento logico a la izquierda entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1.
+ *  \brief     Esta función hace el desplazamiento logico a la izquierda entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
@@ -204,7 +192,7 @@ void TST (uint32_t Rn,uint32_t Rm);
 void LSL(uint32_t *Rd,uint32_t Rn,uint32_t y);
 
 /**
- *  \brief     Esta función hace el desplazamiento logico a la derecha entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1.
+ *  \brief     Esta función hace el desplazamiento logico a la derecha entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
@@ -218,12 +206,12 @@ void LSL(uint32_t *Rd,uint32_t Rn,uint32_t y);
 void LSR (uint32_t *Rd,uint32_t Rn,int y);
 
 /**
- *  \brief     Esta función hace la rotación a la derecha entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1.
+ *  \brief     Esta función hace la rotación a la derecha entre el operador 2 y el operador 3, el resultdo lo guarda en el operador 1. 
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     y operador 3 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para realizar la rotación a la derecha.
+ *  \details   Esta función se utiliza para realizar la rotación a la derecha. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -238,7 +226,7 @@ void ROR (uint32_t *Rd,uint32_t Rn,int y);
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     y operador 3 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para realizar el desplazamiento aritmetico a la derecha.
+ *  \details   Esta función se utiliza para realizar el desplazamiento aritmetico a la derecha. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -252,7 +240,7 @@ void ASR (uint32_t *Rd,uint32_t Rn,int y);
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para cambiar el orden de los bytes.
+ *  \details   Esta función se utiliza para cambiar el orden de los bytes. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -267,7 +255,7 @@ void REV (uint32_t *Rd,uint32_t Rn);
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para realizar la AND.
+ *  \details   Esta función se utiliza para realizar la AND. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -281,7 +269,7 @@ void BIC (uint32_t *Rd,uint32_t Rn,uint32_t Rm);
  *  \param     Rd operador 1 tipo puntero de 32 bits
  *  \param     Rn operador 2 tipo entero de 32 bits
  *  \return    no retorna valor
- *  \details   Esta función se utiliza para guardar el complemento del registro.
+ *  \details   Esta función se utiliza para guardar el complemento del registro. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -294,7 +282,7 @@ void MVN(uint32_t *Rd,uint32_t Rn);
  *  \brief     Esta función no realiza niguna operación.
  *  \param     No recive ningún parametros (variables)
  *  \return    Por esta razón no retorna ningun valor.
- *  \details   Esta función no hace nada.
+ *  \details   Esta función no hace nada. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -308,7 +296,7 @@ void NOP();
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener el complemento a dos de un número.
+ *  \details   Esta función se utiliza para obtener el complemento a dos de un número. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -323,7 +311,7 @@ void RSB (uint32_t *Rd,uint32_t Rn);
  *  \param     Rn operador 2 tipo entero de 32 bits.
  *  \param     Rm operador 3 tipo entero de 32 bits.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener la resta con carry.
+ *  \details   Esta función se utiliza para obtener la resta con carry. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -336,7 +324,7 @@ void SBC (uint32_t *Rd,uint32_t Rn,uint32_t Rm);
  *  \brief     Esta función realiza un salto cuando la bandera de Zero sea igual a 1.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando se active la bandera de Zero.
+ *  \details   Esta función se utiliza para obtener un salto cuando se active la bandera de Zero. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -349,7 +337,7 @@ void BEQ(int Sal);
  *  \brief     Esta función realiza un salto cuando la bandera de Zero sea igual a 0.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando este en 0 la bandera de Zero.
+ *  \details   Esta función se utiliza para obtener un salto cuando este en 0 la bandera de Zero. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -359,24 +347,24 @@ void BEQ(int Sal);
 void BNE(int Sal);
 
 
-/**
+v/**
  *  \brief     Esta función realiza un salto cuando haya un carry (sea igual a 1).
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando se active la bandera de carry.
+ *  \details   Esta función se utiliza para obtener un salto cuando se active la bandera de carry. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
  *  \date      19/09/2015
  *  \pre       First initialize the system.
- */;
+ */
 void BCS(int Sal);
 
 /**
  *  \brief     Esta función realiza un salto cuando la bandera de carry sea igual a 0.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando este en 0 la bandera de carry.
+ *  \details   Esta función se utiliza para obtener un salto cuando este en 0 la bandera de carry. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -389,7 +377,7 @@ void BCC(int Sal);
  *  \brief     Esta función realiza un salto cuando la bandera de negativo sea igual a 1.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando se active la bandera de negativo.
+ *  \details   Esta función se utiliza para obtener un salto cuando se active la bandera de negativo. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -402,7 +390,7 @@ void BMI(int Sal);
  *  \brief     Esta función realiza un salto cuando la bandera de negativo sea igual a 0.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando este en 0 la bandera de negativo.
+ *  \details   Esta función se utiliza para obtener un salto cuando este en 0 la bandera de negativo. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -416,7 +404,7 @@ void BPL(int Sal);
  *  \brief     Esta función realiza un salto cuando la bandera de overflow sea igual a 1.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando se active la bandera de overflow.
+ *  \details   Esta función se utiliza para obtener un salto cuando se active la bandera de overflow. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -429,7 +417,7 @@ void BVS(int Sal)
  *  \brief     Esta función realiza un salto cuando la bandera de overflow sea igual a 0.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando este en 0 la bandera de overflow.
+ *  \details   Esta función se utiliza para obtener un salto cuando este en 0 la bandera de overflow. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -442,20 +430,20 @@ void BVS(int Sal)
  *  \brief     Esta función realiza un salto cuando la bandera de carry sea igual a 1 y la bandera de Zero sea igual a 0.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando este en 1 el carry y en 0 el zero.
+ *  \details   Esta función se utiliza para obtener un salto cuando este en 1 el carry y en 0 el zero. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
  *  \date      19/09/2015
  *  \pre       First initialize the system.
- */;
-void BHI(int Sal);
+ */
+void BHI(int Sal)
 
 /**
  *  \brief     Esta función realiza un salto cuando la bandera de carry sea igual a 0 ó la bandera de Zero sea igual a 1.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando este en 0 el carry ó en 1 el zero.
+ *  \details   Esta función se utiliza para obtener un salto cuando este en 0 el carry ó en 1 el zero. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -465,7 +453,7 @@ void BHI(int Sal);
 void BLS(int Sal);
 
 
-/**
+v/**
  *  \brief     Esta función realiza un salto cuando la bandera de negativo sea igual a la bandera de overflow.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
@@ -482,30 +470,30 @@ void BGE(int Sal)
  *  \brief     Esta función realiza un salto cuando la bandera de negativo sea diferente a la bandera de overflow.
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando las banderas de negativo y overflow sean diferentes.
- *  \author    Juan Manuel Quintero Polania- Leader
- *  \author    Julio Edgar Mosquera Angulo - Documenting
- *  \version   4.1a
- *  \date      19/09/2015
- *  \pre       First initialize the system.
- **/
-void BLT(int Sal);
-
-/**
- *  \brief     Esta función realiza un salto cuando la bandera de negativo sea igual a overflow y la bandera de Zero sea igual a 0.
- *  \param     Sal operador 1 tipo entero.
- *  \return    No retorna valor.
- *  \details   Esta función se utiliza para obtener un salto cuando esten igualeslas banderas negativo y overflow y en 0 el zero.
+ *  \details   Esta función se utiliza para obtener un salto cuando las banderas de negativo y overflow sean diferentes. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
  *  \date      19/09/2015
  *  \pre       First initialize the system.
  */
-void BGT(int Sal);
+void BLT(int Sal)
 
 /**
- *  \brief     Esta función realiza un salto cuando la bandera de Zero sea igual a 1 o la bandera de negativo sea diferente al overflow.
+ *  \brief     Esta función realiza un salto cuando la bandera de negativo sea igual a overflow y la bandera de Zero sea igual a 0.
+ *  \param     Sal operador 1 tipo entero.
+ *  \return    No retorna valor.
+ *  \details   Esta función se utiliza para obtener un salto cuando esten igualeslas banderas negativo y overflow y en 0 el zero. 
+ *  \author    Juan Manuel Quintero Polania- Leader
+ *  \author    Julio Edgar Mosquera Angulo - Documenting
+ *  \version   4.1a
+ *  \date      19/09/2015
+ *  \pre       First initialize the system.
+ */
+void BGT(int Sal)
+
+/**
+ *  \brief     Esta función realiza un salto cuando la bandera de Zero sea igual a 1 o la bandera de negativo sea diferente al overflow. 
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
  *  \details   Esta función se utiliza para obtener un salto cuando este en 1 el zero o sean diferentes las banderas de negativo y de overflow en 0 el zero.
@@ -517,7 +505,7 @@ void BGT(int Sal);
 void BLE(int Sal)
 
 /**
- *  \brief     Esta función realiza un salto de lo que haya acumulado en pc hasta un número.
+ *  \brief     Esta función realiza un salto de lo que haya acumulado en pc hasta un número. 
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
  *  \details   Esta función se utiliza para obtener un salto cuando desde el valor de pc hasta otro número especifico.
@@ -529,7 +517,7 @@ void BLE(int Sal)
 void B(int Sal)
 
 /**
- *  \brief     Esta función realiza un salto de lo que haya acumulado en pc hasta un número.
+ *  \brief     Esta función realiza un salto de lo que haya acumulado en pc hasta un número. 
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
  *  \details   Esta función se utiliza para obtener un salto cuando desde el valor de pc hasta otro número especifico.
@@ -541,7 +529,7 @@ void B(int Sal)
 void BL(int Sal)
 
 /**
- *  \brief     Esta función realiza un salto de lo que haya acumulado en pc.
+ *  \brief     Esta función realiza un salto de lo que haya acumulado en pc. 
  *  \param     Sal operador 1 tipo entero.
  *  \return    No retorna valor.
  *  \details   Esta función se utiliza para obtener un salto cuando desde el valor de pc.
@@ -553,7 +541,7 @@ void BL(int Sal)
 void BX(int Sal);
 
 /**
- *  \brief     Esta función imprime las banderas en el menu.
+ *  \brief     Esta función imprime las banderas en el menu. 
  *  \param     No recive parametros.
  *  \return    No retorna valor.
  *  \details   Esta función se utiliza para obtener un salto cuando desde el valor de pc.
@@ -569,7 +557,7 @@ void PBanderas ();
  *  \param     ptra operador 1 tipo puntero de 32 bits.
  *  \param     memor operador 2 tipo puntero de 32 bits.
  *  \return    no retorna valor
- *  \details   Esta función se utiliza para borrar todo el historial de los registros.
+ *  \details   Esta función se utiliza para borrar todo el historial de los registros. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -594,7 +582,7 @@ void Mmemor(uint32_t *memor);
  *  \brief     Esta función crea una variable global en operador 1 para guardadr los registros en el operador 1.
  *  \param     m operador 1 tipo puntero de 32 bits.
  *  \return    no retorna valor
- *  \details   Esta función se utiliza para guardar los registro en memoria.
+ *  \details   Esta función se utiliza para guardar los registro en memoria. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -608,7 +596,7 @@ void OBMEMOR(uint32_t *m);
  *  \param     Rd operador 1 tipo puntero de 32 bits.
  *  \param     Rm operador 2 tipo puntero de 32 bits.
  *  \return    no retorna valor
- *  \details   Esta función para guardar los datos en la memoria de la pila, solomanete resive 8 registros del 0-7.
+ *  \details   Esta función para guardar los datos en la memoria de la pila, solomanete resive 8 registros del 0-7. 
  *  \author    Juan Manuel Quintero Polania- Leader
  *  \author    Julio Edgar Mosquera Angulo - Documenting
  *  \version   4.1a
@@ -616,6 +604,17 @@ void OBMEMOR(uint32_t *m);
  *  \pre       First initialize the system.
  */
 void PUSH (uint32_t Rd,uint32_t Rn,uint32_t Rm);
+
+/**
+ *  \brief     Esta función obtiene registros.
+ *  \param     m operador 1 puntero tipo entero de 32 bits.
+ *  \return    No retorna valor.
+ *  \author    Juan Manuel Quintero Polania- Leader
+ *  \author    Julio Edgar Mosquera Angulo - Documenting
+ *  \version   4.1a
+ *  \date      19/09/2015
+ *  \pre       First initialize the system.
+*/
 void OBR(uint32_t *m);
 
 

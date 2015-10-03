@@ -1,14 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
 #include "Operaciones.h"
-#include  <curses.h>
 int c,s,o,n,Pc=0,LR=0;//Variables globales banderas
-uint32_t *memor,*R;
-
-void OBMEMOR(uint32_t *m){
-memor=m;
-}
-void OBR(uint32_t *m){
-R=m;
-}
 
 void RPC(int *P)//Un puntero apuntado a la variable PC DEL MAIN la modifica con el valor del PC
 {
@@ -318,8 +312,7 @@ else{
 }
 void LSR (uint32_t *Rd,uint32_t Rn,int y){
     Pc+=2;
-   *Rd=Rn>>y;
-   Rn=Rn>>(y-1);
+   * Rn=Rn>>(y-1);
 
   if((Rn&1)==1){
         c=1;
@@ -328,7 +321,6 @@ else
 {
     c=0;
 }
-
 if((*Rd>>31)&1==1){
     n=1;
 }
@@ -513,12 +505,9 @@ void BEQ(int Sal){
 }
 void BNE(int Sal){
     if(s==0){
-
-
         Pc+=Sal*2;
     }
     else{
-
     Pc+=2;
     }
 }
@@ -605,7 +594,7 @@ void BLT(int Sal){
 
 }
 void BGT(int Sal){
-    if(s==0&&n==0){
+    if(s==0&&n==o){
         Pc+=Sal*2;
     }
     else{
@@ -621,172 +610,25 @@ void BLE(int Sal){
     }
 }
 void B(int Sal){
+
 Pc+=Sal*2;
 }
 void BL(int Sal){
-
 LR=Pc+2;
 Pc+=Sal*2;
 }
 void BX(int Sal){
-
 Pc=Sal;
 }
 void OBLR (int *P){
 *P=LR;
 }
-
 void PBanderas (){
-   move(7,50);
-   attron(COLOR_PAIR(1));
-    printw("C:");
-    move(7,65);
-    printw("Z:");
-    move(8,50);
-    printw("O:");
-    move(8,65);
-    printw("N:");
-    move(15,50);
-    printw("PC:");
-    move(16,50);
-    printw("LR:");
-    refresh();
-    attroff(COLOR_PAIR(1));
-       move(7,50);
-
-   attron(COLOR_PAIR(2));
-   move(7,53);
-    printw("%.8X",c);
-    move(7,68);
-    printw("%.8X",s);
-    move(8,53);
-    printw("%.8X",o);
-    move(8,68);
-    printw("%.8X",n);
-    move(15,53);
-    printw("%.8X",Pc);
-    move(16,53);
-    printw("%.8X",LR);
-    refresh();
-    attroff(COLOR_PAIR(2));
-
+    printf("CARRY:----- %d\n",c);
+    printf("ZERO:------ %d\n",s);
+    printf("OVERFLOW:-- %d\n",o);
+    printf("NEGATIVO:-- %d\n",n);
 }
-
-void LRegistros(uint32_t *ptra,uint32_t *memor){
-int i=0;
-for (i=0;i<16;i++){
-    ptra[i]=0;
-}
-Pc=0;
-LR=0;
-c=0;
-o=0;
-n=0;
-s=0;
-
-
-
-
-   for (i=0;i<64;i++){
-    memor[i]=4294967295;
-   }
-
-
-}
-
-void Mmemor(uint32_t *memor){
-
-	border( ACS_VLINE, ACS_VLINE,
-			ACS_HLINE, ACS_HLINE,
-			ACS_ULCORNER, ACS_URCORNER,
-			ACS_LLCORNER, ACS_LRCORNER	);
-
-	attron(COLOR_PAIR(3));	/* Activa el color verde para el
-							   texto y negro para el fondo Pair 1*/
-							   move(1,2);
-    printw("Arm Cortex-M0-Emulator:");
-    attroff(COLOR_PAIR(3));
-    refresh();
-
-int i=0;
-int a,b=0;
-attron(COLOR_PAIR(1));
-move(1,28);
-printw("             ");
-refresh();
-    printw("SRAM");
-attroff(COLOR_PAIR(1));
-
-for(a=255;a>191;a-=4){
-
-        move (5+b,10);
-        attron(COLOR_PAIR(1));
-        printw("  %.2X",a);
-        attroff(COLOR_PAIR(1));
-        refresh();
-        attron(COLOR_PAIR(2));
-        printw("  %.8X",memor[i]);
-        attroff(COLOR_PAIR(2));
-            refresh();
-        attron(COLOR_PAIR(1));
-        printw("  %.2X",a-64);
-        attroff(COLOR_PAIR(1));
-        refresh();
-        attron(COLOR_PAIR(2));
-        printw("  %.8X",memor[i+1]);
-        attroff(COLOR_PAIR(2));
-        refresh();
-        attron(COLOR_PAIR(1));
-        printw("  %.2X",a-128);
-        attroff(COLOR_PAIR(1));
-        refresh();
-        attron(COLOR_PAIR(2));
-        printw("  %.8X",memor[i+2]);
-        attroff(COLOR_PAIR(2));
-        refresh();
-        attron(COLOR_PAIR(1));
-        printw("  %.2X",a-192);
-        attroff(COLOR_PAIR(1));
-        refresh();
-        attron(COLOR_PAIR(2));
-        printw("  %.8X",memor[i+3]);
-        attroff(COLOR_PAIR(2));
-        refresh();
-
-
-   i+=4;
-   b++;
-   }
-
-
-}
-void PUSH (uint32_t Rd,uint32_t Rn,uint32_t Rm){
-    int counter=0,i=0;
-    printf("entre cucho");
-    sleep(5);
-for (i=0;i<7;i++){
-    if(Rd==R[i]){
-            memor[64-counter]=Rd;
-    counter++;
-
-    }
-    if(Rn==R[i]){
-            memor[64-counter]=Rn;
-    counter++;
-
-    }
-    if(Rm==R[i]){
-            memor[64-counter]=Rm;
-    counter++;
-
-    }
-}
-    Pc+=2;
-}
-
-
-
-
 
 
 
