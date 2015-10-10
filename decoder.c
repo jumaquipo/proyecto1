@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include "Operaciones.h"
 #include "decoder.h"
+#include <curses.h>
 
 uint32_t *R;
 uint32_t LR;
@@ -12,6 +13,15 @@ R=A;
 
 void decodeInstruction(instruction_t instruction)
 {
+    if(strcmp(instruction.mnemonic,"PUSH") == 0){
+
+                          PUSH(&instruction.registers_list[0]);
+            }
+ if(strcmp(instruction.mnemonic,"POP") == 0){
+
+                          POP(&instruction.registers_list[0]);
+            }
+
 
     if((instruction.op1_type=='R')&&(instruction.op2_type=='#')){
 	  if( strcmp(instruction.mnemonic,"ADC") == 0 ){
@@ -82,6 +92,7 @@ void decodeInstruction(instruction_t instruction)
 }
     }
      if((instruction.op1_type=='R')&&(instruction.op2_type=='R')&&((instruction.op3_type!='R'))){
+
 	if( strcmp(instruction.mnemonic,"ADC") == 0 ){
 
     ADC(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
@@ -269,18 +280,21 @@ void decodeInstruction(instruction_t instruction)
                 BL(instruction.op1_value);
             }
             if(strcmp(instruction.mnemonic,"BX") == 0){
+
+                     if(instruction.op1_type!='L'||instruction.op1_type!='R'){
                           BX(instruction.op1_value);
-            }
-             if(strcmp(instruction.mnemonic,"PUSH") == 0){
-                          PUSH(R[instruction.op1_value],R[instruction.op2_value],R[instruction.op3_value]);
-            }
 
-
+            }
+            }
         }
+
         if(strcmp(instruction.mnemonic,"BX") == 0){
+
         if(instruction.op1_type=='L'||instruction.op1_type=='R'){
+
                     OBLR(&LR);
                     BX(LR);
+        }
                  }
         }
 
@@ -288,7 +302,8 @@ void decodeInstruction(instruction_t instruction)
 
     }
 
-}
+
+
 
 
 instruction_t getInstruction(char* instStr)

@@ -1,10 +1,11 @@
 #include "Operaciones.h"
 #include  <curses.h>
 int c,s,o,n,Pc=0,LR=0;//Variables globales banderas
-uint32_t *memor,*R;
+uint32_t *R,counter=0;
+uint8_t *memoria;
 
-void OBMEMOR(uint32_t *m){
-memor=m;
+void OBMEMOR(uint8_t *a){
+memoria=a;
 }
 void OBR(uint32_t *m){
 R=m;
@@ -133,10 +134,7 @@ if((*Rd>>31)&1==1 ){
 else{
     n=0;
 }
-printf("\nCARRY: %d\n",c);
-    printf("ZERO: %d\n",s);
-    printf("OVERFLOW: %d\n",o);
-    printf("NEGATIVO: %d",n);
+
 }
 uint32_t MOV (uint32_t *Rd,uint32_t Rn){
     *Rd=Rn;//Mueve el valor del registro que se desea copiar al registro de destino
@@ -627,9 +625,9 @@ void BL(int Sal){
 
 LR=Pc+2;
 Pc+=Sal*2;
+
 }
 void BX(int Sal){
-
 Pc=Sal;
 }
 void OBLR (int *P){
@@ -672,7 +670,7 @@ void PBanderas (){
 
 }
 
-void LRegistros(uint32_t *ptra,uint32_t *memor){
+void LRegistros(uint32_t *ptra,uint8_t *memor){
 int i=0;
 for (i=0;i<16;i++){
     ptra[i]=0;
@@ -687,14 +685,15 @@ s=0;
 
 
 
-   for (i=0;i<64;i++){
-    memor[i]=4294967295;
+   for (i=255;0<=i;i--){//cambie
+    memor[i]=-1;
    }
+
 
 
 }
 
-void Mmemor(uint32_t *memor){
+void Mmemor(uint32_t *memor){//cambie
 
 	border( ACS_VLINE, ACS_VLINE,
 			ACS_HLINE, ACS_HLINE,
@@ -708,8 +707,8 @@ void Mmemor(uint32_t *memor){
     attroff(COLOR_PAIR(3));
     refresh();
 
-int i=0;
-int a,b=0;
+int i=64;
+int b=0;
 attron(COLOR_PAIR(1));
 move(1,28);
 printw("             ");
@@ -717,76 +716,318 @@ refresh();
     printw("SRAM");
 attroff(COLOR_PAIR(1));
 
-for(a=255;a>191;a-=4){
-
-        move (5+b,10);
+for(i=255;195<=i;i-=4){
+        move (5+b,6);
         attron(COLOR_PAIR(1));
-        printw("  %.2X",a);
+        printw(" %.2X:",i);
         attroff(COLOR_PAIR(1));
-        refresh();
         attron(COLOR_PAIR(2));
-        printw("  %.8X",memor[i]);
+        printw(" %.2X %.2X %.2X %.2X",memoria[i],memoria[i-1],memoria[i-2],memoria[i-3]);
         attroff(COLOR_PAIR(2));
-            refresh();
         attron(COLOR_PAIR(1));
-        printw("  %.2X",a-64);
+        printw(" %.2X:",i-64);
         attroff(COLOR_PAIR(1));
-        refresh();
         attron(COLOR_PAIR(2));
-        printw("  %.8X",memor[i+1]);
+        printw(" %.2X %.2X %.2X %.2X",memoria[i-64],memoria[i-65],memoria[i-66],memoria[i-67]);
         attroff(COLOR_PAIR(2));
-        refresh();
         attron(COLOR_PAIR(1));
-        printw("  %.2X",a-128);
+        printw(" %.2X:",i-128);
         attroff(COLOR_PAIR(1));
-        refresh();
         attron(COLOR_PAIR(2));
-        printw("  %.8X",memor[i+2]);
+        printw(" %.2X %.2X %.2X %.2X",memoria[i-128],memoria[i-129],memoria[i-130],memoria[i-131]);
         attroff(COLOR_PAIR(2));
-        refresh();
         attron(COLOR_PAIR(1));
-        printw("  %.2X",a-192);
+        printw(" %.2X:",i-192);
         attroff(COLOR_PAIR(1));
-        refresh();
         attron(COLOR_PAIR(2));
-        printw("  %.8X",memor[i+3]);
+        printw(" %.2X %.2X %.2X %.2X",memoria[i-192],memoria[i-193],memoria[i-194],memoria[i-195]);
         attroff(COLOR_PAIR(2));
         refresh();
 
+        b++;
+}
+}
 
-   i+=4;
-   b++;
-   }
+
+void PUSH(uint8_t *Rd){
+    int i=0;
+
+    Pc+=2;
+    for(i=0;i<16;i++){
+       if(Rd[i]==1){
+            if(i<8||i==15){
+
+            memoria[255-counter]=R[i];
+             counter++;
+
+
+    }
+       }
+
+
 
 
 }
-void PUSH (uint32_t Rd,uint32_t Rn,uint32_t Rm){
-    int counter=0,i=0;
-    printf("entre cucho");
-    sleep(5);
-for (i=0;i<7;i++){
-    if(Rd==R[i]){
-            memor[64-counter]=Rd;
-    counter++;
+R[13]=255-counter;
+}
+void POP(uint8_t *Rd){
+    int i=0;
+
+    Pc+=2;
+for(i=15;0<i;i--){
+
+
+       if(Rd[i]==1){
+            if(i<8||i==15){
+                    counter--;
+                        R[i]=memoria[255-counter];
+             memoria[255-counter]=-1;
+            }
 
     }
-    if(Rn==R[i]){
-            memor[64-counter]=Rn;
-    counter++;
 
+}
+R[13]=255-counter;
+
+}
+void LDR (uint32_t *Rd,uint32_t Rn,uint32_t Rm){
+int Adress,i,c;
+
+for(i=0;12<i;i++){
+    if(Rn==R[i]){
+            if(i==15||i==14){
+               Rm=Rm*4;
+            }
+        c++;
     }
     if(Rm==R[i]){
-            memor[64-counter]=Rm;
-    counter++;
 
+        c++;
     }
+
+
+
 }
-    Pc+=2;
+
+Adress=Rn+Rm;
+
+*Rd=memoria[Adress];
+
+
+}
+void LDRB (uint32_t *Rd,uint32_t Rn,uint32_t Rm){//nuevo de aqui abajo
+int Base,i;
+uint32_t a;
+
+
+for(i=0;12<i;i++){
+    if(Rn==R[i]){
+
+
+        c++;
+    }
+    if(Rm==R[i]){
+
+        c++;
+    }
+
+
+
+}
+if(c==2){
+    Base=Rn+Rm;
+    for(i=1;i<=8;i++){
+    a+=((memoria[Base]<<(4*i))*(4*i));
+    *Rd=a;
+
+}
+
+
+}
+if(c=1){
+for(i=1;i<=8;i++){
+    a+=((Rm<<(4*i))*(4*i));
+
+}
+Base=Rn+a;
+a=0;
+   for(i=1;i<=8;i++){
+    a+=((memoria[Base]<<(4*i))*(4*i));
+
+}
+*Rd=a;
+
+
+}
+}
+
+void LDRH (uint32_t *Rd,uint32_t Rn,uint32_t Rm){
+int Base,i;
+uint32_t a;
+
+
+for(i=0;12<i;i++){
+    if(Rn==R[i]){
+            if(i==15||i==14){
+               Rm=Rm*2;
+            }
+        c++;
+    }
+    if(Rm==R[i]){
+
+        c++;
+    }
+
+
+
+}
+if(c==2){
+    Base=Rn+Rm;
+    for(i=1;i<=8;i++){
+    a+=((memoria[Base]<<(4*i))*(4*i));
+    *Rd=a;
+
+}
+
+
+}
+if(c=1){
+for(i=1;i<=8;i++){
+    a+=((Rm<<(4*i))*(4*i));
+
+}
+Base=Rn+a;
+a=0;
+   for(i=1;i<=8;i++){
+    a+=((memoria[Base]<<(4*i))*(4*i));
+
+}
+*Rd=a;
+
+
+}
+
+
+}
+void LDRSB(uint32_t *Rd,uint32_t Rn,uint32_t Rm){
+int Base,i;
+uint32_t a;
+
+
+    Base=Rn+Rm;
+    for(i=1;i<=8;i++){
+    a+=((memoria[Base]<<(4*i))*(4*i));
+
+}
+a=(a|(1<<31));
+*Rd=a;
+
+}
+void LDRSH(uint32_t *Rd,uint32_t Rn,uint32_t Rm){
+int Base,i;
+uint32_t a;
+
+
+    Base=Rn+Rm;
+    for(i=1;i<=8;i++){
+    a+=((memoria[Base]<<(4*i))*(4*i));
+
+}
+a=(a|(1<<31));
+*Rd=a;
+
+}
+
+void STR(uint32_t *Rd,uint32_t Rn,uint32_t Rm){
+int Base,i;
+uint32_t a;
+
+for(i=0;12<i;i++){
+    if(Rn==R[i]){
+            if(i==15||i==14){
+               Rm=Rm*4;
+            }
+        c++;
+    }
+    if(Rm==R[i]){
+
+        c++;
+    }
+
+
+
+}
+
+Base=Rn+Rm;
+memoria[Base]=Rn;
+
+
+}
+void STRB(uint32_t *Rd,uint32_t Rn,uint32_t Rm){
+int Base,i;
+uint32_t a;
+
+
+for(i=0;12<i;i++){
+    if(Rn==R[i]){
+
+        c++;
+    }
+    if(Rm==R[i]){
+
+        c++;
+    }
+
+
+
+}
+if(c==2){
+    Base=Rn+Rm;
+    memoria[Base]=(*Rd&255);
 }
 
 
 
+if(c==1){
+for(i=1;i<=8;i++){
+    a+=((Rm<<(4*i))*(4*i));
 
+}
+Base=Rn+a;
+memoria[Base]=(*Rd&255);
+
+
+}
+}
+
+
+
+void STRH(uint32_t *Rd,uint32_t Rn,uint32_t Rm){
+int Base,i;
+uint32_t a;
+
+
+for(i=0;12<i;i++){
+    if(Rn==R[i]){
+            if(i==15||i==14){
+               Rm=Rm*2;
+            }
+        c++;
+    }
+    if(Rm==R[i]){
+
+        c++;
+    }
+
+
+
+}
+
+    Base=Rn+Rm;
+    memoria[Base]=(*Rd&65535);
+
+
+}
 
 
 

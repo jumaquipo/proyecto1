@@ -1,8 +1,11 @@
 #include "Minstruccion.h"
 
+
+
+
 void Minstruccion(instruction_t instruction){
 
-
+int i;
 
      move(3,10);
     attron(COLOR_PAIR(1));
@@ -48,16 +51,23 @@ void Minstruccion(instruction_t instruction){
          refresh();
 
      }
-    if(strncmp(instruction.mnemonic,"P",1)==0){
+
+
+    if(strncmp(instruction.mnemonic,"P",1)==0){//cambie
              move(3,26);
     attron(COLOR_PAIR(2));
         printw("                                      ");
         refresh();
-         move(3,26);
-        printw("%s<%c%d %c%d %c%d>",instruction.op1_type,instruction.op1_value,instruction.op2_type,instruction.op2_value,instruction.op3_type,instruction.op3_value);
+        move(3,26);
+         printw("%s {",instruction.mnemonic);
+        for(i=0;i<8;i++){
+         if(instruction.registers_list[i]==1){
+        printw(" R%d",i);
+         }
+        }
+         printw(" }");
          attroff(COLOR_PAIR(2));
          refresh();
-
      }
 
 

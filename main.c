@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <curses.h>
-
 #include <dos.h>
 #include "Mregistros.h"
 #include "Operaciones.h"
@@ -21,14 +16,14 @@ int main()
     init_pair(3, COLOR_RED, COLOR_WHITE);
     init_pair(4, COLOR_RED, COLOR_BLACK);
 
-    int C=0,PC=0,key,ind=0;
+    int C=0,PC=0,key,ind=0,LR;
     uint32_t R[16];
-    uint32_t memor[64];
-    R[1]=2;
-    R[2]=-2;
+    uint8_t memor[256];//cambie
 registro(R);
 OBMEMOR(memor);
-OBR(&R[0]);
+OBR(R);
+LRegistros(R,memor);
+
 	//------- No modificar ------//
 			int i, num_instructions;
 		ins_t read;
@@ -46,26 +41,10 @@ OBR(&R[0]);
 	//---------------------------//rreglo con las instrucciones */
 	//---------------------------//
 
-    Mregistro(R,16);
 
-    PBanderas();
      Mregistro(R,16);
-      PBanderas();
+     PBanderas();
 
-      /*init_pair(4, COLOR_GREEN, COLOR_BLACK);
-init_pair(5, COLOR_WHITE, COLOR_BLACK);
-init_pair(6, COLOR_RED, COLOR_BLACK);
-
-     move(5,10);
-    attron(COLOR_PAIR(4));
-    printw("Instruccion:");
-    attroff(COLOR_PAIR(4));
-    refresh();
-     move(22,2);
-       attron(COLOR_PAIR(6));
-printw("F10:Step    F9:Run   F8:Pause   F7:Stop   F6:Reset    F5:SRam     Esc:Quit");
-        attroff(COLOR_PAIR(6));
-refresh();*/
 key=getch();
 while(ind!=2){
         if(key==27 &&ind==0){
@@ -75,41 +54,57 @@ while(ind!=2){
         key=getch();
         }
 switch(key){
-     case 274:
+
+         case 274:
          if(ind==0){
          instruction = getInstruction(instructions[PC]); // Instrucción en la posición 0
+		Minstruccion(instruction);
 		decodeInstruction(instruction);
 		 PBanderas();
     RPC(&PC);
+    R[15]=PC;
+    OBLR(&LR);
+    R[14]=LR;
     Mregistro(R,16);
-    Minstruccion(instruction);
     key=getch();
              }
          if(ind==1){
             instruction = getInstruction(instructions[PC]); // Instrucción en la posición 0
+		Minstruccion(instruction);
 		decodeInstruction(instruction);
 		RPC(&PC);
-		 Minstruccion(instruction);
+
+		 Mmemor(memor);
+		 R[15]=PC;
+    OBLR(&LR);
+    R[14]=LR;
 		 key=getch();
          }
     break;
 
-   case 82:
+   case 273:
        if(ind==0){
      instruction = getInstruction(instructions[PC]); // Instrucción en la posición 0
+   Minstruccion(instruction);
     decodeInstruction(instruction);
     PBanderas();
     RPC(&PC);
     Mregistro(R,16);
-    Minstruccion(instruction);
+
+    R[15]=PC;
+    OBLR(&LR);
+    R[14]=LR;
     sleep(1);
        }
        if(ind==1){
         instruction = getInstruction(instructions[PC]); // Instrucción en la posición 0
-    decodeInstruction(instruction);
     Minstruccion(instruction);
+    decodeInstruction(instruction);
     Mmemor(memor);
     RPC(&PC);
+    R[15]=PC;
+    OBLR(&LR);
+    R[14]=LR;
     sleep(1);
        }
     break;
@@ -122,17 +117,23 @@ switch(key){
     ind=2;
     break;
 
-   case 268:
+   case 270:
        if(ind==0){
     LRegistros(R,memor);
     PBanderas();
     RPC(&PC);
+    R[15]=PC;
+    OBLR(&LR);
+    R[14]=LR;
     Mregistro(R,16);
     key=getch();
        }
        if(ind==1){
         LRegistros(R,memor);
         RPC(&PC);
+        R[15]=PC;
+    OBLR(&LR);
+    R[14]=LR;
             Mmemor(memor);
 
        }
