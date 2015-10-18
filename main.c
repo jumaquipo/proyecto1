@@ -15,8 +15,9 @@ int main()
 	init_pair(2, COLOR_WHITE, COLOR_BLACK);
     init_pair(3, COLOR_RED, COLOR_WHITE);
     init_pair(4, COLOR_RED, COLOR_BLACK);
+    char interrup[16]={0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0};
 
-    int C=0,PC=0,key,ind=0,LR;
+    int PC=0,key,ind=0,LR,h=0,co=0;
     uint32_t R[16];
     uint8_t memor[256];//cambie
 registro(R);
@@ -47,66 +48,83 @@ LRegistros(R,memor);
 
 key=getch();
 while(ind!=2){
-        if(key==27 &&ind==0){
-            ind=2;
-        }
         if(kbhit()==TRUE){
         key=getch();
         }
-switch(key){
+        if(interrup[h]==0 && interrup[h-1]==1){
+                printf("entre hhwhw");
+           POP_INTERRUP();
+        }
 
+switch(key){
          case 274:
-         if(ind==0){
+
          instruction = getInstruction(instructions[PC]); // Instrucción en la posición 0
-		Minstruccion(instruction);
+		Minstruccion(instruction,interrup[h]);
 		decodeInstruction(instruction);
+		if(ind==0 && interrup[h]==0){
 		 PBanderas();
+		 Mregistro(R,16);
+       		}
+       		if(ind==1 && interrup[h]==0){
+                    Mmemor(memor);
+                }
+            if(ind==0 && interrup[h]==1){
+                    if(co==0){
+                    PUSH_INTERRUP(h);
+                    }
+                    co++;
+		 PBanderas();
+		 Mregistro(R,16);
+       		}
+       		if(ind==1 && interrup[h]==1){
+           if(co==0){
+                    PUSH_INTERRUP(h);
+                    }
+                    Mmemor(memor);
+                    co++;
+                }
     RPC(&PC);
     R[15]=PC;
     OBLR(&LR);
     R[14]=LR;
-    Mregistro(R,16);
     key=getch();
-             }
-         if(ind==1){
-            instruction = getInstruction(instructions[PC]); // Instrucción en la posición 0
-		Minstruccion(instruction);
-		decodeInstruction(instruction);
-		RPC(&PC);
-
-		 Mmemor(memor);
-		 R[15]=PC;
-    OBLR(&LR);
-    R[14]=LR;
-		 key=getch();
-         }
     break;
 
    case 273:
-       if(ind==0){
+
      instruction = getInstruction(instructions[PC]); // Instrucción en la posición 0
-   Minstruccion(instruction);
+   Minstruccion(instruction,interrup[h]);
     decodeInstruction(instruction);
-    PBanderas();
-    RPC(&PC);
-    Mregistro(R,16);
+     RPC(&PC);
+     if(ind==0 && interrup[h]==0){
+		 PBanderas();
+		 Mregistro(R,16);
+
+       		}
+       		if(ind==1 && interrup[h]==0){
+                    Mmemor(memor);
+                }
+            if(ind==0 && interrup[h]==1){
+                    if(co==0){
+                    PUSH_INTERRUP(h);
+                    }
+		 PBanderas();
+		 Mregistro(R,16);
+		 co++;
+       		}
+       		if(ind==1 && interrup[h]==1){
+            if(co==0){
+                    PUSH_INTERRUP(h);
+                    }
+                    Mmemor(memor);
+                    co++;
+                }
 
     R[15]=PC;
     OBLR(&LR);
     R[14]=LR;
     sleep(1);
-       }
-       if(ind==1){
-        instruction = getInstruction(instructions[PC]); // Instrucción en la posición 0
-    Minstruccion(instruction);
-    decodeInstruction(instruction);
-    Mmemor(memor);
-    RPC(&PC);
-    R[15]=PC;
-    OBLR(&LR);
-    R[14]=LR;
-    sleep(1);
-       }
     break;
 
    case 272:
@@ -118,31 +136,26 @@ switch(key){
     break;
 
    case 270:
-       if(ind==0){
     LRegistros(R,memor);
+    if(ind==0){
     PBanderas();
+    Mregistro(R,16);
+    }
+    if(ind==1){
+        Mmemor(memor);
+    }
     RPC(&PC);
     R[15]=PC;
     OBLR(&LR);
     R[14]=LR;
-    Mregistro(R,16);
     key=getch();
-       }
-       if(ind==1){
-        LRegistros(R,memor);
-        RPC(&PC);
-        R[15]=PC;
-    OBLR(&LR);
-    R[14]=LR;
-            Mmemor(memor);
-
-       }
     break;
+
    case 269:
        ind=1;
        clear();
     Mmemor(memor);
-    Minstruccion(instruction);
+    Minstruccion(instruction,interrup[h]);
     move(22,2);
        attron(COLOR_PAIR(3));
               printw("F10:Step    F9:Run   F8:Pause   F7:Stop   F6:Reset    F5:SRam     Esc:Quit");
@@ -153,21 +166,27 @@ switch(key){
 
    case 27:
     clear();
+    if(ind==0){
+            exit(0);
+    }
     if(ind==1){
     ind=0;
     PBanderas();
     Mregistro(R,16);
     PBanderas();
-    Minstruccion(instruction);
+    Minstruccion(instruction,interrup[h]);
     key=getch();
     }
-    if(ind==0){
-            exit(0);
-    }
+
     break;
 }
-C+=2;
+printf("pc %d",PC);
+if(15>h){
+h++;
 }
+}
+
+
 	getch();	/* Espera entrada del usuario */
 	endwin();	/* Finaliza el modo curses */
 

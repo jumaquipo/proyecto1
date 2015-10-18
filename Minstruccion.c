@@ -3,17 +3,25 @@
 
 
 
-void Minstruccion(instruction_t instruction){
+void Minstruccion(instruction_t instruction,int a){
 
 int i;
-
+if(a==0){
      move(3,10);
     attron(COLOR_PAIR(1));
     printw("Instruccion:");
 
     attroff(COLOR_PAIR(1));
     refresh();
+}
+if(a==1){
+     move(3,10);
+    attron(COLOR_PAIR(1));
+    printw("Interrupcion:");
 
+    attroff(COLOR_PAIR(1));
+    refresh();
+}
 
  if(strncmp(instruction.mnemonic,"B",1)!=0){
     if(instruction.op3_type!='N'){
@@ -73,4 +81,5 @@ int i;
 
 
 }
+
 

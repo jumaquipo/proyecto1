@@ -85,7 +85,7 @@
 
 1443673416 source:c:\users\juan\documents\curses\pruebamregistroncurses\lregistros.c
 
-1444144948 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\decoder.c
+1445041416 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\decoder.c
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
@@ -93,7 +93,7 @@
 	"decoder.h"
 	<curses.h>
 
-1444446288 c:\users\juan\documents\curses\borrador\pruebamregistroncurses\operaciones.h
+1445048444 c:\users\juan\documents\curses\borrador\pruebamregistroncurses\operaciones.h
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
@@ -106,10 +106,10 @@
 
 1443673416 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\lregistros.c
 
-1444446288 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\minstruccion.c
+1445047711 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\minstruccion.c
 	"Minstruccion.h"
 
-1444438177 c:\users\juan\documents\curses\borrador\pruebamregistroncurses\minstruccion.h
+1445047560 c:\users\juan\documents\curses\borrador\pruebamregistroncurses\minstruccion.h
 	<curses.h>
 	"decoder.h"
 	<stdio.h>
@@ -124,11 +124,11 @@
 	<stdlib.h>
 	<curses.h>
 
-1444449472 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\operaciones.c
+1445123655 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\operaciones.c
 	"Operaciones.h"
 	<curses.h>
 
-1444446769 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\main.c
+1445047969 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\main.c
 	<dos.h>
 	"Mregistros.h"
 	"Operaciones.h"

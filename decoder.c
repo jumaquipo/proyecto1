@@ -13,6 +13,47 @@ R=A;
 
 void decodeInstruction(instruction_t instruction)
 {
+     if(strcmp(instruction.mnemonic,"LDR") == 0){
+
+                          OPTYPE(instruction.op3_type);
+                          LDR(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
+            }
+             if(strcmp(instruction.mnemonic,"LDRB") == 0){
+
+                          OPTYPE(instruction.op3_type);
+                          LDRB(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
+            }
+             if(strcmp(instruction.mnemonic,"LDRH") == 0){
+
+                          OPTYPE(instruction.op3_type);
+                          LDRH(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
+            }
+
+     if(strcmp(instruction.mnemonic,"LDRSB") == 0){
+
+                          OPTYPE(instruction.op3_type);
+                          LDRSB(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
+            }
+             if(strcmp(instruction.mnemonic,"LDRSH") == 0){
+
+                          OPTYPE(instruction.op3_type);
+                          LDRSH(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
+            }
+             if(strcmp(instruction.mnemonic,"STR") == 0){
+
+                          OPTYPE(instruction.op3_type);
+                          STR(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
+            }
+             if(strcmp(instruction.mnemonic,"STRB") == 0){
+
+                          OPTYPE(instruction.op3_type);
+                          STRB(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
+            }
+             if(strcmp(instruction.mnemonic,"STRH") == 0){
+
+                          OPTYPE(instruction.op3_type);
+                          STRH(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
+            }
     if(strcmp(instruction.mnemonic,"PUSH") == 0){
 
                           PUSH(&instruction.registers_list[0]);
