@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 //PROFE SE TUVO UN PROBLEMA CON EL MSYS DEBIDO A ESO NO PUDIMOS TERMINAR CON LA INTERFAS COMO HUBIESEMOS QUERIDO
+void ESPC(int pc);
 void RPC(int *P);
+void MPuertos (uint8_t *irq);
 void OBLR(int *P);
 void ADC(uint32_t *Rd,uint32_t Rn,uint32_t Rm);
 void ADD(uint32_t *Rd,uint32_t Rn,uint32_t Rm);

@@ -85,15 +85,16 @@
 
 1443673416 source:c:\users\juan\documents\curses\pruebamregistroncurses\lregistros.c
 
-1445041416 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\decoder.c
+1445457342 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\decoder.c
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
 	"Operaciones.h"
 	"decoder.h"
+	"io.h"
 	<curses.h>
 
-1445048444 c:\users\juan\documents\curses\borrador\pruebamregistroncurses\operaciones.h
+1445455574 c:\users\juan\documents\curses\borrador\pruebamregistroncurses\operaciones.h
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
@@ -106,17 +107,17 @@
 
 1443673416 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\lregistros.c
 
-1445047711 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\minstruccion.c
+1445384822 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\minstruccion.c
 	"Minstruccion.h"
 
-1445047560 c:\users\juan\documents\curses\borrador\pruebamregistroncurses\minstruccion.h
+1445384831 c:\users\juan\documents\curses\borrador\pruebamregistroncurses\minstruccion.h
 	<curses.h>
 	"decoder.h"
 	<stdio.h>
 	<stdlib.h>
 	<stdint.h>
 
-1443679704 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\mregistro.c
+1445397817 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\mregistro.c
 	"Mregistros.h"
 
 1443586960 c:\users\juan\documents\curses\borrador\pruebamregistroncurses\mregistros.h
@@ -124,13 +125,22 @@
 	<stdlib.h>
 	<curses.h>
 
-1445123655 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\operaciones.c
+1445462898 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\operaciones.c
 	"Operaciones.h"
 	<curses.h>
+	"io.h"
 
-1445047969 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\main.c
+1445463125 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\main.c
 	<dos.h>
 	"Mregistros.h"
 	"Operaciones.h"
 	"decoder.h"
+	"io.h"
+
+1444686796 c:\users\juan\documents\curses\borrador\pruebamregistroncurses\io.h
+	<stdint.h>
+	<curses.h>
+
+1445398411 source:c:\users\juan\documents\curses\borrador\pruebamregistroncurses\io.c
+	"io.h"
 

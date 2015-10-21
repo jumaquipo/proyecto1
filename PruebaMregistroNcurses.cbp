@@ -50,6 +50,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="decoder.h" />
+		<Unit filename="io.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="io.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

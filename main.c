@@ -2,8 +2,10 @@
 #include "Mregistros.h"
 #include "Operaciones.h"
 #include "decoder.h"
+#include "io.h"
 int main()
 {
+    char on=0;
     initscr();
     curs_set(0);	/* Cursor Invisible */
 	raw();			/* Activa modo raw */
@@ -15,9 +17,11 @@ int main()
 	init_pair(2, COLOR_WHITE, COLOR_BLACK);
     init_pair(3, COLOR_RED, COLOR_WHITE);
     init_pair(4, COLOR_RED, COLOR_BLACK);
-    char interrup[16]={0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0};
+    extern uint8_t irq[16];
 
-    int PC=0,key,ind=0,LR,h=0,co=0;
+    uint8_t data;
+
+    int PC=0,key,ind=0,LR,h=0,co=0,inter=0,coninter=0;
     uint32_t R[16];
     uint8_t memor[256];//cambie
 registro(R);
@@ -47,44 +51,36 @@ LRegistros(R,memor);
      PBanderas();
 
 key=getch();
-while(ind!=2){
+
+ind=0;
+initIO();
+while(ind!=4){
         if(kbhit()==TRUE){
         key=getch();
         }
-        if(interrup[h]==0 && interrup[h-1]==1){
-                printf("entre hhwhw");
+        if(PC==LR&&co!=0){
            POP_INTERRUP();
-        }
 
+if(ind==3){
+    showPorts();
+	endwin();
+	getch();
+}
+        }
 switch(key){
          case 274:
-
+RPC(&PC);
          instruction = getInstruction(instructions[PC]); // Instrucción en la posición 0
-		Minstruccion(instruction,interrup[h]);
+		Minstruccion(instruction);
 		decodeInstruction(instruction);
-		if(ind==0 && interrup[h]==0){
+
+		if(ind==0){
 		 PBanderas();
 		 Mregistro(R,16);
        		}
-       		if(ind==1 && interrup[h]==0){
+       		if(ind==1){
                     Mmemor(memor);
                 }
-            if(ind==0 && interrup[h]==1){
-                    if(co==0){
-                    PUSH_INTERRUP(h);
-                    }
-                    co++;
-		 PBanderas();
-		 Mregistro(R,16);
-       		}
-       		if(ind==1 && interrup[h]==1){
-           if(co==0){
-                    PUSH_INTERRUP(h);
-                    }
-                    Mmemor(memor);
-                    co++;
-                }
-    RPC(&PC);
     R[15]=PC;
     OBLR(&LR);
     R[14]=LR;
@@ -92,36 +88,20 @@ switch(key){
     break;
 
    case 273:
-
      instruction = getInstruction(instructions[PC]); // Instrucción en la posición 0
-   Minstruccion(instruction,interrup[h]);
+   Minstruccion(instruction);
     decodeInstruction(instruction);
-     RPC(&PC);
-     if(ind==0 && interrup[h]==0){
+    RPC(&PC);
+     if(ind==0){
 		 PBanderas();
 		 Mregistro(R,16);
 
        		}
-       		if(ind==1 && interrup[h]==0){
+       		if(ind==1){
                     Mmemor(memor);
                 }
-            if(ind==0 && interrup[h]==1){
-                    if(co==0){
-                    PUSH_INTERRUP(h);
-                    }
-		 PBanderas();
 		 Mregistro(R,16);
-		 co++;
-       		}
-       		if(ind==1 && interrup[h]==1){
-            if(co==0){
-                    PUSH_INTERRUP(h);
-                    }
-                    Mmemor(memor);
-                    co++;
-                }
-
-    R[15]=PC;
+		 R[15]=PC;
     OBLR(&LR);
     R[14]=LR;
     sleep(1);
@@ -132,17 +112,28 @@ switch(key){
     break;
 
    case 271:
-    ind=2;
+       clear();
+       ind=3;
+
+      showPorts();
+	endwin();
+	getch();
+
+   key=getch();			// Muestra en pantalla el estado del puerto
     break;
 
    case 270:
     LRegistros(R,memor);
+    initIO();
     if(ind==0){
     PBanderas();
     Mregistro(R,16);
     }
     if(ind==1){
         Mmemor(memor);
+    }
+    if(ind==1){
+        showPorts();
     }
     RPC(&PC);
     R[15]=PC;
@@ -155,10 +146,10 @@ switch(key){
        ind=1;
        clear();
     Mmemor(memor);
-    Minstruccion(instruction,interrup[h]);
+    Minstruccion(instruction);
     move(22,2);
        attron(COLOR_PAIR(3));
-              printw("F10:Step    F9:Run   F8:Pause   F7:Stop   F6:Reset    F5:SRam     Esc:Quit");
+              printw("F10:Step    F9:Run   F8:Pause   F7:Puertos   F6:Reset    F5:SRam     Esc:Quit");
         attroff(COLOR_PAIR(3));
               refresh();
               key=getch();
@@ -169,21 +160,46 @@ switch(key){
     if(ind==0){
             exit(0);
     }
-    if(ind==1){
+    if(ind==1||ind==3){
     ind=0;
     PBanderas();
     Mregistro(R,16);
     PBanderas();
-    Minstruccion(instruction,interrup[h]);
+    Minstruccion(instruction);
     key=getch();
+
     }
 
     break;
+   case 105:
+        move(26,2);
+       attron(COLOR_PAIR(3));
+printw("INGRESE LA INTERRUPCION");
+        attroff(COLOR_PAIR(3));
+refresh();
+    scanw("%d",&inter);
+     move(26,2);
+       attron(COLOR_PAIR(2));
+printw("                                   ");
+        attroff(COLOR_PAIR(2));
+refresh();
+    co++;
+
+    callinte(inter);
+    key=274;
+    R[15]=PC;
+    break;
+
+
 }
-printf("pc %d",PC);
-if(15>h){
-h++;
+ if((strncmp(instruction.mnemonic,"L",1)==0)||(strncmp(instruction.mnemonic,"S",1)==0)){
+if(ind==3){
+    showPorts();
+	endwin();
+	getch();
 }
+}
+Obpc(PC);
 }
 
 

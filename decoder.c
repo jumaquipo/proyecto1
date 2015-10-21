@@ -3,16 +3,53 @@
 #include <stdint.h>
 #include "Operaciones.h"
 #include "decoder.h"
+#include "io.h"
 #include <curses.h>
 
 uint32_t *R;
 uint32_t LR;
+uint32_t pc;
+unsigned char adress;
+uint8_t data;
 void registro(uint32_t *A){
 R=A;
+}
+void Obpc (uint32_t c){
+pc=c;
 }
 
 void decodeInstruction(instruction_t instruction)
 {
+    uint32_t direccion=0;
+     if(strcmp(instruction.mnemonic,"NOP") == 0){
+
+
+                          NOP();
+            }
+             if((strncmp(instruction.mnemonic,"L",1)==0)||(strncmp(instruction.mnemonic,"S",1)==0)){
+
+                   if(strcmp(instruction.mnemonic,"LDR") == 0){
+             if(instruction.op3_type=='#' ){
+                        direccion=instruction.op3_value*4;
+                    }
+                   }
+             if(strcmp(instruction.mnemonic,"STR") == 0){
+             if(instruction.op3_type=='#' ){
+                        direccion=instruction.op3_value*4;
+                    }
+             }
+                    if(strcmp(instruction.mnemonic,"LDRH") == 0){
+             if(instruction.op3_type=='#' ){
+                        direccion=instruction.op3_value*2;
+                    }
+                    }
+                    if(strcmp(instruction.mnemonic,"STRH") == 0){
+             if(instruction.op3_type=='#' ){
+                        direccion=instruction.op3_value*2;
+                    }
+                    }
+                     direccion+=R[instruction.op2_value];
+                     if(direccion>=0x20000000&&direccion<=0x200000FF){
      if(strcmp(instruction.mnemonic,"LDR") == 0){
 
                           OPTYPE(instruction.op3_type);
@@ -54,6 +91,28 @@ void decodeInstruction(instruction_t instruction)
                           OPTYPE(instruction.op3_type);
                           STRH(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
             }
+             }
+              if(direccion>=0x40000000&&direccion<=0x4000000D){
+                     if((strncmp(instruction.mnemonic,"S",1)==0)){
+                            direccion-=1073741824;
+                    adress=direccion;
+                    data=R[instruction.op1_value];
+                    IOAccess(adress,&data,Write);
+                    pc+=2;
+                    ESPC(pc);
+                     }
+                      if((strncmp(instruction.mnemonic,"L",1)==0)){
+                        direccion-=1073741824;
+                         adress=direccion;
+                    IOAccess(adress,&data,Read);
+                    R[instruction.op1_value]=data;
+                    pc+=2;
+                    ESPC(pc);
+                    }
+              }
+
+
+             }
     if(strcmp(instruction.mnemonic,"PUSH") == 0){
 
                           PUSH(&instruction.registers_list[0]);
@@ -106,9 +165,6 @@ void decodeInstruction(instruction_t instruction)
 	}
 	if( strcmp(instruction.mnemonic,"MVN") == 0 ){
     MVN(&R[instruction.op1_value],R[instruction.op2_value]);
-	}
-	if( strcmp(instruction.mnemonic,"NOP") == 0 ){
-
 	}
 	if( strcmp(instruction.mnemonic,"EOR") == 0 ){
     EOR(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
@@ -175,9 +231,6 @@ void decodeInstruction(instruction_t instruction)
 	if( strcmp(instruction.mnemonic,"MVN") == 0 ){
     MVN(&R[instruction.op1_value],R[instruction.op2_value]);
 	}
-	if( strcmp(instruction.mnemonic,"NOP") == 0 ){
-
-	}
 	if( strcmp(instruction.mnemonic,"EOR") == 0 ){
     EOR(&R[instruction.op1_value],R[instruction.op2_value],instruction.op3_value);
 	}
@@ -241,9 +294,6 @@ void decodeInstruction(instruction_t instruction)
 	}
 	if( strcmp(instruction.mnemonic,"MVN") == 0 ){
     MVN(&R[instruction.op1_value],R[instruction.op2_value]);
-	}
-	if( strcmp(instruction.mnemonic,"NOP") == 0 ){
-
 	}
 	if( strcmp(instruction.mnemonic,"EOR") == 0 ){
     EOR(&R[instruction.op1_value],R[instruction.op2_value],R[instruction.op3_value]);

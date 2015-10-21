@@ -1,5 +1,6 @@
 #include "Operaciones.h"
 #include  <curses.h>
+#include "io.h"
 uint32_t c,s,o,n,Pc=0,LR=0;//Variables globales banderas
 uint32_t *R,counter=0;
 uint8_t *memoria;
@@ -625,7 +626,12 @@ Pc+=Sal*2;//aumenta el pc el numero de saltos definido por el usuario
 
 }
 void BX(int Sal){//hace un salto definido por el usuario sin condicion
+if(LR==Sal){
+    Pc=LR;
+}
+else{
 Pc=Sal*2;//aumenta el pc el numero de saltos definido por el usuario
+}
 }
 void OBLR (int *P){//Funcion que obtiene en un puntero la direccion de LR
 *P=LR;// el puntero P se iguala a la direccion de LR
@@ -659,7 +665,7 @@ void PBanderas (){//Funcion que imprime las banderas en pantalla
     move(8,68);
     printw("%.8X",n);
     move(15,53);
-    printw("%.8X",Pc);
+    printw("%.8X",Pc-2);
     move(16,53);
     printw("%.8X",LR);
     refresh();
@@ -806,6 +812,7 @@ void OPTYPE(char tipe){//funcion que Obtiene el tipo del tercer caracter para sa
 }
 
 void LDR (uint32_t *Rd,uint32_t Rn,uint32_t Rm){//load de cuatro bloques de memoria de 8 bits cada uno y se guarda en un registro de 32 bits
+      Rn=Rn-536870912;
       Pc+=2;
 if(type=='#'||Rm==R[15]){//se determina el tipo de la tercera variable para hacer la operacion correspondiente
     Rm=Rm*4;//se agrega a Rm "00" si es un inmediato
@@ -819,7 +826,7 @@ Rm=Rn+Rm; //suma las dos variables para la direccion
 *Rd|=(memoria[Rm+3]<<24); //guarda el cuarto bloque de bits de la memoria  en el registro
 }
 void LDRB (uint32_t *Rd,uint32_t Rn,uint32_t Rm){//load de un entero sin signo de tamaño byte. Al escribirse el dato sobre el registro
-                                                 //destino se extiende con ceros hasta los 32 bits.
+Rn=Rn-536870912;                                              //destino se extiende con ceros hasta los 32 bits.
       Pc+=2;
 Rm=Rm+Rn;//se suma las dos variables para la direccion
 *Rd=memoria[Rm];//se guarda solo el bloque de la direccion
@@ -827,8 +834,12 @@ Rm=Rm+Rn;//se suma las dos variables para la direccion
 
 
 void LDRH (uint32_t *Rd,uint32_t Rn,uint32_t Rm){//load de un entero sin signo de 16 bits. Al escribirse el dato sobre el registro
-                                                 //destino se extiende con ceros hasta los 32 bits.
+        Rn=Rn-536870912;                                          //destino se extiende con ceros hasta los 32 bits.
       Pc+=2;
+if(type=='#'){
+    Rm=Rm*2;
+
+}
 Rm=Rm+Rn;//se suma las dos variables para la direccion
 *Rd=memoria[Rm];// se guarda el primer bloque de la memoria en el registro
 *Rd|=(memoria[Rm+1]<<8);//se guarda el segundo bloque de la memoria en el registro
@@ -837,7 +848,7 @@ Rm=Rm+Rn;//se suma las dos variables para la direccion
 
 
 void LDRSB(uint32_t *Rd,uint32_t Rn,uint32_t Rm){//load de un entero con signo de tamaño byte. Al escribirse el dato sobre el registro
-                                                 //destino se extiende con el bit de signo hasta los 32 bits.
+   Rn=Rn-536870912;                                           //destino se extiende con el bit de signo hasta los 32 bits.
     Pc+=2;
 Rm=Rm+Rn;//se suma las dos variables para la direccion
 *Rd=memoria[Rm];// se guarda el primer bloque de la memoria en el registro
@@ -849,7 +860,8 @@ if(((memoria[Rm]>>7)&1)==1){//si el ultimo bit de la memoria es 1
 }
 }
 void LDRSH(uint32_t *Rd,uint32_t Rn,uint32_t Rm){//load de un entero con signo de 16 bits. Al escribirse el dato sobre el registro
-                                                 //destino se extiende con el bit de signo hasta los 32 bits.
+       Rn=Rn-536870912;
+      Pc+=2;                                           //destino se extiende con el bit de signo hasta los 32 bits.
 Rm=Rm+Rn;//se suma las dos variables para la direccion
 *Rd=memoria[Rm];// se guarda el primer bloque de la memoria en el registro
 *Rd|=(memoria[Rm+1]<<8);// se guarda el segundo bloque de la memoria en el registro
@@ -860,7 +872,8 @@ if(((memoria[Rm+1]>>7)&1)==1){//si el ultimo bit de la memoria es 1
 }
 
 void STR(uint32_t *Rd,uint32_t Rn,uint32_t Rm){
-      Pc=Pc+2;
+       Rn=Rn-536870912;
+      Pc=+2;
 if(type=='#'||Rm==R[15]){
     Rm=Rm*4;
 }
@@ -872,8 +885,8 @@ memoria[Rm+3]=(*Rd>>24);//guarda en la memoria el cuarto byte del registro
 
 }
 void STRB(uint32_t *Rd,uint32_t Rn,uint32_t Rm){//se escribe en memoria un entero de tamaño byte obtenido de los 8 bits menos
-                                                //significativos del registro fuente.
-    Pc=Pc+2;
+        Rn=Rn-536870912;                                        //significativos del registro fuente.
+    Pc=+2;
 Rm=Rm+Rn;//se suma las dos variables para la direccion
 memoria[Rm]=(*Rd&255);//guarda en la memoria el primer byte del registro
 }
@@ -881,7 +894,7 @@ memoria[Rm]=(*Rd&255);//guarda en la memoria el primer byte del registro
 
 
 void STRH(uint32_t *Rd,uint32_t Rn,uint32_t Rm){//se escribe en memoria un entero de 16 bits obtenido de los 16 bits menos significativos
-                                                //del registro fuente.
+          Rn=Rn-536870912;                                      //del registro fuente.
     Pc=+2;
 if(type=='#'){
     Rm=Rm*2;
@@ -892,53 +905,99 @@ memoria[Rm]=(*Rd&255);//guarda en la memoria el primer byte del registro
 memoria[Rm+1]=((*Rd>>8)&255);//guarda en la memoria el segundo byte del registro
 
 }
-void PUSH_INTERRUP(int h){
-    int count=0,i;
-memoria[0]=c;
-memoria[1]=s;
-memoria[2]=n;
-memoria[3]=o;
-for(i=4;i<65;i+=4){
-            memoria[i+3]=((R[count]>>24)&255);
-            memoria[i+2]=((R[count]>>16)&255);
-            memoria[i+1]=((R[count]>>8)&255);
-            memoria[i]=(R[count]&255);
-             count++;
+void PUSH_INTERRUP(){
+int i;
+memoria[255-counter]=c;
+counter++;
+memoria[255-counter]=s;
+counter++;
+memoria[255-counter]=n;
+counter++;
+memoria[255-counter]=o;
+counter++;
+for(i=0;i<16;i++){
+           memoria[255-counter]=((R[i]>>24)&255);//se guarda en el primer bloque o memoria los primeros 0 al 7 bits del registro
+            counter++; //se aumenta el contador de bloques o memoria
+            memoria[255-counter]=((R[i]>>16)&255);//se guarda en el segundo bloque o memoria los bits del 8 al 15  del registro
+            counter++;//se aumenta el contador de bloques o memoria
+            memoria[255-counter]=((R[i]>>8)&255);//se guarda en el tercer bloque o memoria los bits del 16 al 23 del registro
+            counter++;//se aumenta el contador de bloques o memoria
+            memoria[255-counter]=(R[i]&255);//se guarda en el cuarto bloque o memoria los bits del 24 al 31 del registro
+             counter++;//
+}
+R[13]=255-counter;
 }
 
-Pc=h*2;
-
-}
 void POP_INTERRUP(){
-    int i=0,coun=0;
-c=memoria[0];
-memoria[0]=-1;
-s=memoria[1];
-memoria[1]=-1;
-n=memoria[2];
-memoria[2]=-1;
-o=memoria[3];
-memoria[3]=-1;
-for(i=4;i<65;i+=4){
-    R[coun]=0;
-        R[coun]=memoria[i];
-        memoria[i]=-1;
-         R[coun]|=(memoria[i+1]<<8);
-             memoria[i+1]=-1;
-             R[coun]|=(memoria[i+2]<<16);
-             memoria[i+2]=-1;
-           R[coun]|=(memoria[i+3]<<24);
-            memoria[i+3]=-1;
-            coun++;
+    int i=0;
+for(i=15;0<=i;i--){
+                    counter--;//se decrementa el contador de bloques o memoria
+                        R[i]=memoria[255-counter];//se guarda en el registro el cuarto bloque o memoria los bits del 24 al 31 del registro
+             memoria[255-counter]=-1;//se limpia el valor de la memoria
+             counter--;//se decrementa el contador de bloques o memoria
+                        R[i]|=(memoria[255-counter]<<8);//se guarda en el registro el tercer bloque o memoria los bits del 16 al 23 del registro
+             memoria[255-counter]=-1;//se limpia el valor de la memoria
+             counter--;//se decrementa el contador de bloques o memoria
+                        R[i]|=memoria[255-counter]<<16;//se guarda en el registro el segundo bloque o memoria los bits del 8 al 15 del registro
+             memoria[255-counter]=-1;//se limpia el valor de la memoria
+             counter--;//se decrementa el contador de bloques o memoria
+                        R[i]|=(memoria[255-counter]<<24);//se guarda en el registro el primer bloque o memoria los bits del 0 al 7 del registro
+             memoria[255-counter]=-1;//se limpia el valor de la memoria
+            }
 
-}
 
+    counter--;
+c=memoria[255-counter];
+memoria[255-counter]=-1;
+counter--;
+s=memoria[255-counter];
+memoria[255-counter]=-1;
+counter--;
+n=memoria[255-counter];
+memoria[255-counter]=-1;
+counter--;
+o=memoria[255-counter];
+memoria[255-counter]=-1;
 Pc=R[15];
 LR=R[14];
+R[13]=255-counter;
 
 }
 
 
+void callinte(int n){
 
+if(n<16){
+LR=Pc;
+R[15]=LR;
+Pc=n*2;
+
+if(n<8){
+    changePinPortA(n,1);
+}
+if(n>8){
+        n=n-8;
+    changePinPortB(n,1);
+}
+PUSH_INTERRUP();
+}
+else{
+         move(26,2);
+       attron(COLOR_PAIR(2));
+printw("                                   ");
+        attroff(COLOR_PAIR(2));
+refresh();
+    move(26,2);
+       attron(COLOR_PAIR(3));
+printw("ERROR VALOR NO VALIDO PARA LAS INTERRUPCIONES");
+        attroff(COLOR_PAIR(3));
+refresh();
+
+}
+}
+void ESPC(int pc){
+Pc=pc;
+
+}
 
 

@@ -61,7 +61,7 @@ a++;
 }
 move(22,2);
        attron(COLOR_PAIR(3));
-printw("F10:Step    F9:Run   F8:Pause   F7:Stop   F6:Reset    F5:SRam     Esc:Quit");
+printw("F10:Step    F9:Run   F8:Pause   F7:Puertos   F6:Reset    F5:SRam     Esc:Quit");
         attroff(COLOR_PAIR(3));
 refresh();
 
